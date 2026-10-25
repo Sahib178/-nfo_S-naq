@@ -1,0 +1,2676 @@
+<!doctype html>
+<html lang="az">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <meta name="theme-color" content="#070e33" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="İnformatika Test" />
+    <title>İnformatika Milyonçusu — Mobil Tətbiq</title>
+
+    <!-- Web App Manifest (PWA) -->
+    <link
+      rel="manifest"
+      href='data:application/manifest+json,{"name":"İnformatika Sınaq Milyonçu","short_name":"İnformatika","start_url":".","display":"standalone","background_color":"#070e33","theme_color":"#ffd166","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/2997/2997295.png","sizes":"512x512","type":"image/png"}]}'
+    />
+
+    <style>
+      :root {
+        --bg: #050b2e;
+        --card-bg: rgba(11, 20, 72, 0.95);
+        --line: #4258b5;
+        --gold: #ffd166;
+        --gold-glow: rgba(255, 209, 102, 0.35);
+        --text: #f5f7ff;
+        --muted: #a4b3f0;
+        --green: #20bf6b;
+        --red: #eb3b5a;
+      }
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(
+          circle at top,
+          #142878 0%,
+          #060c33 60%,
+          #020517 100%
+        );
+        color: var(--text);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .wrap {
+        width: 100%;
+        max-width: 820px;
+        margin: auto;
+        padding: 16px;
+      }
+      .card {
+        background: var(--card-bg);
+        border: 1.5px solid var(--line);
+        border-radius: 24px;
+        padding: clamp(16px, 4vw, 32px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(12px);
+      }
+      .center {
+        text-align: center;
+      }
+      .logo {
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        border: 3px solid var(--gold);
+        display: grid;
+        place-items: center;
+        margin: 0 auto 14px;
+        font-size: 32px;
+        font-weight: 900;
+        color: var(--gold);
+        background: #15246a;
+        box-shadow: 0 0 25px var(--gold-glow);
+      }
+      h1 {
+        font-size: clamp(24px, 5.5vw, 36px);
+        margin: 0 0 8px;
+        line-height: 1.2;
+      }
+      h1 span {
+        color: var(--gold);
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .badges {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 14px 0 20px;
+      }
+      .badge {
+        border: 1px solid var(--line);
+        background: #08113c;
+        border-radius: 20px;
+        padding: 6px 14px;
+        font-size: 13px;
+      }
+      .badge b {
+        color: var(--gold);
+      }
+
+      /* Sinif Grid */
+      .classgrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+        gap: 10px;
+        margin: 16px 0 22px;
+      }
+      .classbtn {
+        min-height: 58px;
+        background: #0c184c;
+        border: 1.5px solid var(--line);
+        border-radius: 14px;
+        color: var(--text);
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      .classbtn:active {
+        transform: scale(0.95);
+      }
+      .classbtn.active {
+        background: linear-gradient(180deg, #ffe082, #ffb300);
+        color: #140d00;
+        border-color: #ffe082;
+        box-shadow: 0 0 20px var(--gold-glow);
+      }
+
+      label {
+        display: block;
+        text-align: left;
+        color: var(--muted);
+        margin: 0 0 6px 4px;
+        font-size: 14px;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 13px 15px;
+        border-radius: 12px;
+        border: 1.5px solid var(--line);
+        background: #060e36;
+        color: #fff;
+        font-size: 16px;
+        margin-bottom: 14px;
+      }
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: var(--gold);
+        box-shadow: 0 0 10px var(--gold-glow);
+      }
+      .row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .row > * {
+        flex: 1 1 180px;
+      }
+
+      .btn {
+        width: 100%;
+        border: 0;
+        border-radius: 14px;
+        padding: 15px 20px;
+        font-weight: 800;
+        font-size: 16px;
+        cursor: pointer;
+        transition:
+          transform 0.1s,
+          filter 0.2s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+      }
+      .btn:active {
+        transform: scale(0.98);
+      }
+      .primary {
+        background: linear-gradient(180deg, #ffe082, #ffb300);
+        color: #1a1200;
+      }
+      .secondary {
+        background: #101c54;
+        border: 1.5px solid var(--line);
+        color: var(--text);
+      }
+      .btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      /* Test Ekranı */
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .pill {
+        background: #091340;
+        border: 1px solid var(--line);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .timer {
+        color: var(--gold);
+      }
+      .progress {
+        height: 6px;
+        background: #101c54;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 18px;
+      }
+      .progress-bar {
+        height: 100%;
+        background: var(--gold);
+        transition: width 0.25s ease;
+      }
+
+      .question-box {
+        background: linear-gradient(180deg, #112061, #0a1443);
+        border: 1.5px solid #3d56b8;
+        border-radius: 18px;
+        padding: 20px 16px;
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: clamp(17px, 3.8vw, 22px);
+        font-weight: 700;
+        line-height: 1.45;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+      .answers-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      @media (min-width: 600px) {
+        .answers-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .ans-btn {
+        background: linear-gradient(180deg, #12205e, #0a1441);
+        border: 1.5px solid var(--line);
+        color: #fff;
+        border-radius: 16px;
+        padding: 14px 16px;
+        font-size: 15px;
+        font-weight: 600;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        min-height: 62px;
+      }
+      .ans-btn:active {
+        transform: scale(0.98);
+      }
+      .ans-btn .letter {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #1d2d78;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        flex-shrink: 0;
+      }
+      .ans-btn.selected {
+        background: linear-gradient(180deg, #ffe082, #ffb300);
+        color: #140d00;
+        border-color: #fff;
+        font-weight: 700;
+      }
+      .ans-btn.selected .letter {
+        background: #140d00;
+        color: #ffe082;
+        border-color: #140d00;
+      }
+
+      .review-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+        gap: 6px;
+        margin: 16px 0;
+      }
+      .rev-tag {
+        padding: 8px 0;
+        border-radius: 8px;
+        font-weight: 800;
+        font-size: 13px;
+        text-align: center;
+      }
+      .c-true {
+        background: var(--green);
+        color: #fff;
+      }
+      .c-false {
+        background: var(--red);
+        color: #fff;
+      }
+      .c-empty {
+        background: #1a2559;
+        color: var(--muted);
+      }
+
+      .code-box {
+        background: #02061f;
+        border: 1.5px dashed var(--gold);
+        border-radius: 12px;
+        padding: 12px;
+        font-family: monospace;
+        font-size: 14px;
+        word-break: break-all;
+        margin: 14px 0;
+        color: #ffe082;
+      }
+      footer {
+        text-align: center;
+        padding: 14px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <div id="app"></div>
+    </main>
+    <footer>İnformatika Şagirdi · Offline Dəstəkli Mobil Test</footer>
+
+    <script>
+      const TOTAL_QUESTIONS = 25;
+
+      /* ========================================================
+   HƏR SİNİF ÜÇÜN XÜSUSİ VƏ GENİŞ SUAL BAZASI (1-11-ci siniflər)
+======================================================== */
+      const QUESTION_POOL = {
+        1: [
+          [
+            "Kompüterdə hərfləri və rəqəmləri yazmaq üçün hansı qurğu lazımdır?",
+            ["Klaviatura", "Monitor", "Dinamik", "Printer"],
+            0,
+          ],
+          [
+            "Ekranda olan ox işarəsini (kursoru) nə idarə edir?",
+            ["Siçan", "Mikrofon", "Qulaqlıq", "Skaner"],
+            0,
+          ],
+          [
+            "Kompüterdə şəkil çəkmək üçün ən sadə proqram hansıdır?",
+            ["Paint", "Kalkulyator", "Saat", "Musiqi pleyeri"],
+            0,
+          ],
+          [
+            "Məlumatı və şəkilləri kağız üzərinə çıxaran qurğu hansıdır?",
+            ["Printer", "Monitor", "Klaviatura", "Dinamik"],
+            0,
+          ],
+          [
+            "Kompüterdən mahnı və ya nağıl dinləmək üçün nə lazımdır?",
+            ["Dinamik və ya qulaqlıq", "Skaner", "Klaviatura", "Siçan"],
+            0,
+          ],
+          [
+            "Kompüter qarşısında oturarkən belimizi necə saxlamalıyıq?",
+            [
+              "Düz və rahat",
+              "Çox əyilmiş",
+              "Ekrana yapışaraq",
+              "Gözləri bərk sıxaraq",
+            ],
+            0,
+          ],
+          [
+            "Kompüterdə məlumatı daxil etmək üçün səsimizi hansı qurğu yazır?",
+            ["Mikrofon", "Monitor", "Printer", "Prosessor"],
+            0,
+          ],
+          [
+            "Klaviaturada ən uzun düymə nə adlanır?",
+            ["Space (Boşluq)", "Enter", "Shift", "Esc"],
+            0,
+          ],
+          [
+            "Kompüter işləmək üçün hansı enerjidən istifadə edir?",
+            ["Elektrik", "Qaz", "Külək", "Su"],
+            0,
+          ],
+          [
+            "Kompüter otağında nə etmək qəti qadağandır?",
+            [
+              "Yemək yemək və su içmək",
+              "Dərs dinləmək",
+              "Müəllimə qulaq asmaq",
+              "Şəkil çəkmək",
+            ],
+            0,
+          ],
+          [
+            "Kompüterdə saxlanılan hər bir şəkil və ya mətn nə adlanır?",
+            ["Fayl", "Masa", "Pəncərə", "Naqil"],
+            0,
+          ],
+          [
+            "Klaviaturada yeni sətrə keçmək üçün hansı düymə sıxılır?",
+            ["Enter", "Caps Lock", "Delete", "Esc"],
+            0,
+          ],
+          [
+            "Ekranda gördüyümüz kiçik şəkillər (proqram işarələri) nədir?",
+            ["Piktoqram (İkona)", "Printer", "Kabel", "Dinamik"],
+            0,
+          ],
+          [
+            "Kompüteri düzgün söndürmək üçün nə etməliyik?",
+            [
+              "Başlat menyusundan söndür əmri verməliyik",
+              "Şnuru cəld dartmalıyıq",
+              "Monitoru örtməliyik",
+              "Klaviaturanı basıb saxlamalıyıq",
+            ],
+            0,
+          ],
+          [
+            "Gözlərimizi qorumaq üçün ekrandan nə qədər məsafədə oturmalıyıq?",
+            ["50-60 sm məsafədə", "10 sm məsafədə", "Çox uzaqda", "Yerdə"],
+            0,
+          ],
+          [
+            "İnformasiyanı gözlərimizlə alarkən hansı informasiya növü olur?",
+            ["Vizual (görmə)", "Səs", "Qoxu", "Dad"],
+            0,
+          ],
+          [
+            "Hansı qurğu kompüterin xarici görünüşünə aid deyil?",
+            [
+              "Prosessor çipi",
+              "Monitor",
+              "Sistem bloku",
+              "Siçan",
+            ],
+            0,
+          ],
+          [
+            "Qələmlə dəftərə yazmaq kimi kompüterdə nə edirik?",
+            [
+              "Klaviaturada yazırıq",
+              "Kabeli yoxlayırıq",
+              "Dinamiki çeviririk",
+              "Siçanı qaldırırıq",
+            ],
+            0,
+          ],
+          [
+            "Şəkil çəkərkən səhvi silmək üçün Paint-də hansı alət var?",
+            ["Pozan", "Fırça", "Boyaq qabı", "Qələm"],
+            0,
+          ],
+          [
+            "Videoda müəllimi və ya dostumuzu görmək üçün hansı qurğu lazımdır?",
+            ["Veb-kamera", "Printer", "Skaner", "Kalkulyator"],
+            0,
+          ],
+          [
+            "Hansı canlı deyil, lakin hesablama apara bilir?",
+            ["Kompüter", "Pişik", "Dovşan", "Ağac"],
+            0,
+          ],
+          [
+            "Kompüterdə rəngləri seçmək üçün Paint-də hara baxırıq?",
+            ["Rənglər palitrasına", "Səs düyməsinə", "Saat bölməsinə", "Şnura"],
+            0,
+          ],
+          [
+            "Kompüterdə oyun oynayarkən və ya oxuyarkən fasilə vermək niyə vacibdir?",
+            [
+              "Gözlərimiz və bədənimiz dincəlsin deyə",
+              "Kompüter acdığı üçün",
+              "Klaviaturanı silmək üçün",
+              "Heç bir səbəb yoxdur",
+            ],
+            0,
+          ],
+          [
+            "İnformasiyanı qulaqlarımızla eşidəndə bu hansı informasiyadır?",
+            ["Səs informasiyası", "Şəkil", "Qoxu", "Dad"],
+            0,
+          ],
+          [
+            "Mətndəki səhv hərfi soldan pozmaq üçün hansı düymə istifadə olunur?",
+            ["Backspace", "Enter", "Shift", "Ctrl"],
+            0,
+          ],
+          [
+            "Planşetdə göstəricini idarə etmək üçün siçan əvəzinə nə istifadə edilir?",
+            ["Barmağımız", "Açar", "Kabel", "Dinamik"],
+            0,
+          ],
+          [
+            "Kağızdakı rəsmi kompüterə köçürən qurğu hansıdır?",
+            ["Skaner", "Printer", "Monitor", "Qulaqlıq"],
+            0,
+          ],
+          [
+            "Hansı təhlükəsizlik qaydası düzgündür?",
+            [
+              "Elektrik naqillərinə toxunmamaq",
+              "Yaş əllə düymələri basmaq",
+              "Ekranı təpikləmək",
+              "Kabeli çeynəmək",
+            ],
+            0,
+          ],
+        ],
+        2: [
+          [
+            "İnformasiya üzərində hansı əsas proseslər aparılır?",
+            [
+              "Saxlanması, ötürülməsi və emalı",
+              "Yalnız silinməsi",
+              "Yalnız rənglənməsi",
+              "Heç biri",
+            ],
+            0,
+          ],
+          [
+            "Faylları səliqəli saxlamaq üçün kompüterdə nə yaradırıq?",
+            ["Qovluq (Folder)", "Monitor", "Kabel", "Dinamik"],
+            0,
+          ],
+          [
+            "Görülən işi itirməmək üçün hansı əmr icra edilməlidir?",
+            ["Saxla (Save)", "Sil (Delete)", "Kəs (Cut)", "Çıxış"],
+            0,
+          ],
+          [
+            "İnternetdə axtarış etmək üçün istifadə olunan proqramlar nə adlanır?",
+            ["Brauzer", "Antivirus", "Kalkulyator", "Paint"],
+            0,
+          ],
+          [
+            "İnternetdə şəxsi təhlükəsizlik üçün nəyi yad insanlara demək olmaz?",
+            [
+              "Ev ünvanını və parolları",
+              "Havanın dərəcəsini",
+              "Dərs cədvəlini",
+              "Məktəbin nömrəsini",
+            ],
+            0,
+          ],
+          [
+            "Klaviaturada baş hərfləri davamlı yazmaq üçün hansı düymə sıxılır?",
+            ["Caps Lock", "Shift", "Ctrl", "Alt"],
+            0,
+          ],
+          [
+            "Hansı fayl şəkil faylı hesab olunur?",
+            ["foto.jpg", "dərslik.docx", "mahnı.mp3", "oyun.exe"],
+            0,
+          ],
+          [
+            "Kompüterin əsas hesablama aparan beyni hansıdır?",
+            ["Prosessor", "Monitor", "Siçan", "Klaviatura"],
+            0,
+          ],
+          [
+            "Məlumatın bir nüsxəsini çıxarmaq üçün hansı əmr verilir?",
+            ["Köçür (Copy)", "Kəs (Cut)", "Yapışdır (Paste)", "Sil (Delete)"],
+            0,
+          ],
+          [
+            "Alqoritm nəyə deyilir?",
+            [
+              "Məqsədə çatmaq üçün addımlar ardıcıllığına",
+              "Kompüter naqilinə",
+              "Şəkil faylına",
+              "Ekran ölçüsünə",
+            ],
+            0,
+          ],
+          [
+            "İnformasiya daşıyıcısına hansı aiddir?",
+            ["Fleş-kart", "Monitor", "Dinamik", "Mikrofon"],
+            0,
+          ],
+          [
+            "Hansı cümlə düzgün mühakimədir?",
+            [
+              "Monitor çıxış qurğusudur",
+              "Klaviatura səsi çıxarır",
+              "Printer şəkil çəkir",
+              "Siçan kağız çap edir",
+            ],
+            0,
+          ],
+          [
+            "Səbət (Recycle Bin) nə üçündür?",
+            [
+              "Silinmiş faylları müvəqqəti saxlamaq üçün",
+              "Mahnı oxutmaq üçün",
+              "İnternetə girmək üçün",
+              "Yazı yazmaq üçün",
+            ],
+            0,
+          ],
+          [
+            "Hansı hərəkət kompüterə zərər verə bilər?",
+            [
+              "Klaviaturanın üstünə çay dağıtmaq",
+              "Ekranı xüsusi dəsmalla silmək",
+              "Siçandan ehtiyatla istifadə etmək",
+              "Faylı yaddaşda saxlamaq",
+            ],
+            0,
+          ],
+          [
+            "Mətn redaktorunda kursorun sağındakı simvolu hansı düymə silir?",
+            ["Delete", "Backspace", "Space", "Enter"],
+            0,
+          ],
+          [
+            "Elektron poçtla nə göndərmək olar?",
+            [
+              "Məktub, fayl və şəkil",
+              "İsti yemək",
+              "Həqiqi kitab",
+              "Dəftər",
+            ],
+            0,
+          ],
+          [
+            "Güclü parol necə olmalıdır?",
+            [
+              "Hərf, rəqəm və işarələrdən ibarət",
+              "Yalnız 12345",
+              "Yalnız öz adımız",
+              "Boş",
+            ],
+            0,
+          ],
+          [
+            "Hansı fayl tipi səs faylıdır?",
+            [".mp3", ".png", ".txt", ".exe"],
+            0,
+          ],
+          [
+            "Masaüstü (Desktop) nədir?",
+            [
+              "Kompüter açılanda ekranda görünən əsas iş sahəsi",
+              "Fleş-kartın qapağı",
+              "Printerin kağız qabı",
+              "Siçanın təkəri",
+            ],
+            0,
+          ],
+          [
+            "Pəncərəni bağlamaq üçün hansı işarə sıxılır?",
+            ["X (Xaç)", "_ (Xətt)", "Kvadrat", "Ox"],
+            0,
+          ],
+          [
+            "Hansı informasiya növü dad bilmə ilə əlaqəlidir?",
+            [
+              "Yeməyin şirin olması",
+              "Mahnının səsi",
+              "Gülün rəngi",
+              "Daşın soyuqluğu",
+            ],
+            0,
+          ],
+          [
+            "Kompüter şəbəkəsi nə üçündür?",
+            [
+              "Kompüterlərin bir-biri ilə məlumat mübadiləsi üçün",
+              "Kompüteri rəngləmək üçün",
+              "Klaviaturanı silmək üçün",
+              "Heç biri",
+            ],
+            0,
+          ],
+          [
+            "Mətnin altına xətt çəkmək formatlaşdırmadır, yoxsa redaktə?",
+            ["Formatlaşdırma", "Redaktə", "Pozma", "Çap"],
+            0,
+          ],
+          [
+            "Hansı alqoritm növündə addımlar ardıcıl, bir dəfə yerinə yetirilir?",
+            ["Xətti", "Budaqlanan", "Dövri", "Qarışıq"],
+            0,
+          ],
+          [
+            "İnformasiyanı ötürən tərəf necə adlanır?",
+            ["Mənbə", "Qəbuledici", "Kanal", "Kod"],
+            0,
+          ],
+          [
+            "Hansı yaddaş növü kompüter sönəndə məlumatı itirir?",
+            ["Əməli yaddaş (RAM)", "Fleş-kart", "Sərt disk", "CD disk"],
+            0,
+          ],
+        ],
+        3: [
+          [
+            "Alqoritmin hansı xassəsi onun hər kəs tərəfindən birmənalı başa düşülməsini tələb edir?",
+            ["Müəyyənlik", "Diskretlik", "Nəticəvilik", "Kütləvilik"],
+            0,
+          ],
+          [
+            "1 Bayt neçə bitdən ibarətdir?",
+            ["8 bit", "2 bit", "10 bit", "1024 bit"],
+            0,
+          ],
+          [
+            "Blok-sxemdə şərt (müqayisə) hansı həndəsi fiqurla göstərilir?",
+            ["Romb", "Düzbucaqlı", "Oval", "Paraleloqram"],
+            0,
+          ],
+          [
+            "Slaydlar hazırlamaq və nümayiş etdirmək üçün hansı proqramdan istifadə olunur?",
+            ["PowerPoint", "Excel", "Notepad", "Paint"],
+            0,
+          ],
+          [
+            "Mətnin şriftini, ölçüsünü və rəngini dəyişmək nə adlanır?",
+            ["Formatlaşdırma", "Daxiletmə", "Silmə", "Çap"],
+            0,
+          ],
+          [
+            "Hansı qrafik redaktor sadə animasiyalar və rəsmlər üçün uyğundur?",
+            ["Tux Paint / Paint", "WordPad", "Calculator", "VLC"],
+            0,
+          ],
+          [
+            "İnformasiyanın hansı xassəsi onun indiki zamana uyğunluğunu göstərir?",
+            ["Aktuallıq", "Tamlıq", "Dəqiqlik", "Etibarlılıq"],
+            0,
+          ],
+          [
+            "Kompüter virusu nədir?",
+            [
+              "Ziyanverici kiçik proqram",
+              "Toz və kir",
+              "Qırıq kabel",
+              "Soyuqdəymə xəstəliyi",
+            ],
+            0,
+          ],
+          [
+            "Blok-sxemdə əməliyyat və ya hərəkət hansı fiqurla verilir?",
+            ["Düzbucaqlı", "Romb", "Dairə", "Oval"],
+            0,
+          ],
+          [
+            "Kompüterdə faylın adı neçə hissədən ibarətdir?",
+            [
+              "2 hissədən: ad və genişlənmə",
+              "1 hissədən",
+              "4 hissədən",
+              "Faylın adı olmur",
+            ],
+            0,
+          ],
+          [
+            "Mətndə sözün surətini çıxarmaq üçün hansı qısayol düymələri sıxılır?",
+            ["Ctrl + C", "Ctrl + V", "Ctrl + Z", "Ctrl + X"],
+            0,
+          ],
+          [
+            "Dövri alqoritm nəyə deyilir?",
+            [
+              "Müəyyən addımları dəfələrlə təkrarlanan alqoritmə",
+              "Heç vaxt bitməyən işə",
+              "Tək bir addımdan ibarət işə",
+              "Budaqlara ayrılan işə",
+            ],
+            0,
+          ],
+          [
+            "İnformasiyanı ziyanvericilərdən qorumaq üçün hansı proqram lazımdır?",
+            ["Antivirus", "Brauzer", "Musiqi pleyeri", "Kalkulyator"],
+            0,
+          ],
+          [
+            "Rəqəmsal təsvirin ən kiçik elementi nə adlanır?",
+            ["Piksel", "Bayt", "Xana", "Nöqtə vergül"],
+            0,
+          ],
+          [
+            "Blok-sxemin başlanğıc və sonu hansı fiqurla göstərilir?",
+            ["Oval", "Kvadrat", "Üçbucaq", "Romb"],
+            0,
+          ],
+          [
+            "Klaviaturada səhvi geri qaytarmaq üçün ən çox hansı qısayol istifadə edilir?",
+            ["Ctrl + Z", "Ctrl + P", "Ctrl + S", "Alt + F4"],
+            0,
+          ],
+          [
+            "Kompüterdə qovluq daxilində başqa qovluq yaratmaq olarmı?",
+            [
+              "Bəli, o alt-qovluq adlanır",
+              "Xeyr, qətiyyən olmaz",
+              "Yalnız 1 dənə olar",
+              "Yalnız mətn faylında olar",
+            ],
+            0,
+          ],
+          [
+            "Mətn faylının uzantısı hansıdır?",
+            [".txt", ".png", ".mp3", ".avi"],
+            0,
+          ],
+          [
+            "İnternetdə ünsiyyət etiketi nəyi tələb edir?",
+            [
+              "Nəzakətli və hörmətli danışmağı",
+              "Hamını təhqir etməyi",
+              "Şayiə yaymağı",
+              "Bütün hərfləri böyük qışqıraraq yazmağı",
+            ],
+            0,
+          ],
+          [
+            "Kompüterin xarici yaddaş qurğusuna hansı aiddir?",
+            ["Sərt disk (HDD/SSD)", "Monitor", "Prosessor", "RAM"],
+            0,
+          ],
+          [
+            "Scratch mühitində qəhrəman necə adlanır?",
+            ["Spryt", "Piksel", "Kursor", "Fayl"],
+            0,
+          ],
+          [
+            "Budaqlanan alqoritmdə hansı sözlər işlədilir?",
+            ["Əgər ... Onda ... Əks halda", "Təkrarla", "Başla", "Davam et"],
+            0,
+          ],
+          [
+            "Bir simvol kompüter yaddaşında nə qədər yer tutur (ASCII standartında)?",
+            ["1 bayt", "1 bit", "8 bayt", "1024 bit"],
+            0,
+          ],
+          [
+            "Məlumatı kəsib götürmək üçün hansı düymələr sıxılır?",
+            ["Ctrl + X", "Ctrl + C", "Ctrl + V", "Ctrl + A"],
+            0,
+          ],
+          [
+            "Veb-saytların ünvanı hansı hərflərlə başlayır?",
+            ["http:// və ya https://", "ftp//", "file:", "doc://"],
+            0,
+          ],
+          [
+            "Axtarış sistemlərinə hansı nümunə ola bilər?",
+            ["Google", "Paint", "Excel", "Windows"],
+            0,
+          ],
+        ],
+        4: [
+          [
+            "Kompüter bütün məlumatları hansı say sistemində saxlayır?",
+            [
+              "İkilik (0 və 1)",
+              "Onluq (0-9)",
+              "Səkkizlik",
+              "Onaltılıq",
+            ],
+            0,
+          ],
+          [
+            "1 Kilobayt (KB) neçə bayta bərabərdir?",
+            ["1024 bayt", "1000 bayt", "8 bayt", "256 bayt"],
+            0,
+          ],
+          [
+            "Scratch proqramında əmrlər necə birləşdirilir?",
+            [
+              "Lego blokları kimi bir-birinə keçirilərək",
+              "Əllə kod yazaraq",
+              "Kağızda cızaraq",
+              "Monitora yapışdıraraq",
+            ],
+            0,
+          ],
+          [
+            "Elektron cədvəldə xana necə adlandırılır?",
+            [
+              "Sütun hərfi və sətir nömrəsi ilə (məs: B3)",
+              "Yalnız rəqəmlə",
+              "Yalnız hərflə",
+              "Rəngi ilə",
+            ],
+            0,
+          ],
+          [
+            "Kompüterin proqram təminatı ingiliscə necə adlanır?",
+            ["Software", "Hardware", "Freeware", "Shareware"],
+            0,
+          ],
+          [
+            "Kompüterin aparat təminatı (qurğuları) necə adlanır?",
+            ["Hardware", "Software", "Firmware", "Malware"],
+            0,
+          ],
+          [
+            "Onluq 5 ədədinin ikilik say sistemində yazılışı hansıdır?",
+            ["101", "110", "111", "100"],
+            0,
+          ],
+          [
+            "Təqdimatda slaydlar arası animasiyaya nə deyilir?",
+            ["Keçid (Transition)", "Şrift", "Format", "Dizayn"],
+            0,
+          ],
+          [
+            "Genişlənməsi .xlsx olan fayl hansı proqrama aiddir?",
+            ["MS Excel", "MS Word", "MS PowerPoint", "Paint"],
+            0,
+          ],
+          [
+            "Mürəkkəb obyektin sadələşdirilmiş nüsxəsi nədir?",
+            ["Model", "Fayl", "Orijinal", "Surət"],
+            0,
+          ],
+          [
+            "Mətndə bütün mətni eyni anda seçmək üçün hansı düymələr sıxılır?",
+            ["Ctrl + A", "Ctrl + B", "Ctrl + S", "Ctrl + F"],
+            0,
+          ],
+          [
+            "İnformasiyanın tamlığı nə deməkdir?",
+            [
+              "Qərar qəbul etmək üçün yetərli olması",
+              "Vaxtında verilməsi",
+              "Yalan olmaması",
+              "Rəngli olması",
+            ],
+            0,
+          ],
+          [
+            "Elektron cədvəldə sətirlər nə ilə işarələnir?",
+            ["Rəqəmlərlə", "Latın hərfləri ilə", "Nöqtələrlə", "İşarələrlə"],
+            0,
+          ],
+          [
+            "Scratch-də yaşıl bayraq nəyi bildirir?",
+            [
+              "Proqramın işə salınmasını",
+              "Proqramın dayanmasını",
+              "Səhvin olmasını",
+              "Yeni pəncərəni",
+            ],
+            0,
+          ],
+          [
+            "Hansı şəbəkə növü bir məktəbin və ya otağın kompüterlərini birləşdirir?",
+            ["Lokal şəbəkə (LAN)", "Qlobal şəbəkə (WAN)", "İnternet", "Peyk"],
+            0,
+          ],
+          [
+            "Giriş qurğularını seçin:",
+            [
+              "Klaviatura, siçan, mikrofon",
+              "Monitor, dinamik, printer",
+              "Prosessor, sərt disk",
+              "Qulaqlıq, proyektor",
+            ],
+            0,
+          ],
+          [
+            "Çıxış qurğularını seçin:",
+            [
+              "Monitor, printer, dinamik",
+              "Skaner, klaviatura, siçan",
+              "Veb-kamera, mikrofon",
+              "Fleşkart, RAM",
+            ],
+            0,
+          ],
+          [
+            "Şəbəkədə hər kompüterin özünəməxsus nömrəsi nə adlanır?",
+            ["IP ünvan", "Sayt adı", "Fayl yolu", "Kabel nömrəsi"],
+            0,
+          ],
+          [
+            "Dövrün əvvəlcədən təkrarlanma sayı bilinən növü hansıdır?",
+            ["Sayğaclı dövr", "Şərtli dövr", "Sonsuz dövr", "Xətti addım"],
+            0,
+          ],
+          [
+            "Kompüterdə faylı həmişəlik (səbətə düşmədən) silmək üçün nə sıxılır?",
+            ["Shift + Delete", "Delete", "Ctrl + Delete", "Alt + Delete"],
+            0,
+          ],
+          [
+            "Onluq 4 ədədinin ikilikdə qarşılığı nədir?",
+            ["100", "101", "110", "111"],
+            0,
+          ],
+          [
+            "Təqdimat proqramında hər bir səhifə necə adlanır?",
+            ["Slayd", "Xana", "Vərəq", "Kadr"],
+            0,
+          ],
+          [
+            "Fayl adında hansı simvoldan istifadə etmək olmaz?",
+            ["?", "Alt xətt (_)", "Nöqtə (.)", "Defis (-)"],
+            0,
+          ],
+          [
+            "Hansı əməliyyat sistemi mobil telefonlar üçündür?",
+            ["Android / iOS", "Windows 10", "Linux Ubuntu", "MS-DOS"],
+            0,
+          ],
+          [
+            "İnformasiyanın etibarlılığı nə deməkdir?",
+            [
+              "Faktların düzgün və həqiqi olması",
+              "Tez çatması",
+              "Uzun olması",
+              "Gizli qalması",
+            ],
+            0,
+          ],
+          [
+            "Kompüterdə səs yazmaq üçün hansı proqram standart gəlir?",
+            ["Səs yazıcı (Sound Recorder)", "Paint", "Excel", "Edge"],
+            0,
+          ],
+        ],
+        5: [
+          [
+            "1 Meqabayt (MB) neçə Kilobaytdır?",
+            ["1024 KB", "1000 KB", "8 KB", "1048576 KB"],
+            0,
+          ],
+          [
+            "Faylların həcmini azaltmaq üçün hansı proses aparılır?",
+            ["Arxivləşdirmə (Sıxma)", "Kopyalama", "Formatlama", "Şifrləmə"],
+            0,
+          ],
+          [
+            "Kompüter aparatları ilə istifadəçi arasında əlaqə yaradan əsas proqram hansıdır?",
+            [
+              "Əməliyyat sistemi (OS)",
+              "Mətn redaktoru",
+              "Antivirus",
+              "Brauzer",
+            ],
+            0,
+          ],
+          [
+            "Genişlənməsi .docx olan fayl hansı tətbiqə aiddir?",
+            ["MS Word", "MS Excel", "MS PowerPoint", "MS Access"],
+            0,
+          ],
+          [
+            "Kompüterdə piksel nəyi xarakterizə edir?",
+            [
+              "Ekranda təsvirin ən kiçik nöqtəsini",
+              "Səsin tezliyini",
+              "Yaddaş həcmini",
+              "Kabel qalınlığını",
+            ],
+            0,
+          ],
+          [
+            "İkilik say sistemində 1 + 1 cəmi nəyə bərabərdir?",
+            ["10", "2", "0", "11"],
+            0,
+          ],
+          [
+            "Scratch mühitində şərt blokları hansı qrupda yerləşir?",
+            ["İdarəetmə (Control)", "Hərəkət", "Görünüş", "Səs"],
+            0,
+          ],
+          [
+            "Kompüter şəbəkəsində məlumatı qəbul edən və yönləndirən qurğu hansıdır?",
+            ["Ruter (Router)", "Monitor", "Printer", "Prosessor"],
+            0,
+          ],
+          [
+            "Vektor qrafikasının üstünlüyü nədir?",
+            [
+              "Təsviri böyütdükdə keyfiyyət itmir",
+              "Yalnız 2 rəngi var",
+              "Piksellərdən ibarətdir",
+              "Şəkil çəkmək olmur",
+            ],
+            0,
+          ],
+          [
+            "Hansı arxiv faylı genişlənməsidir?",
+            [".zip / .rar", ".mp3", ".jpg", ".txt"],
+            0,
+          ],
+          [
+            "Klaviaturada mətni qalın (bold) etmək üçün hansı kombinasiya sıxılır?",
+            ["Ctrl + B", "Ctrl + I", "Ctrl + U", "Ctrl + K"],
+            0,
+          ],
+          [
+            "İnformasiyanın təhlükəsizliyində ehtiyat nüsxə nə üçün lazımdır?",
+            [
+              "Məlumat silindikdə və ya xarab olduqda bərpa etmək üçün",
+              "Virus yaratmaq üçün",
+              "Yaddaşı tez doldurmaq üçün",
+              "Kompüteri sürətləndirmək üçün",
+            ],
+            0,
+          ],
+          [
+            "2 Bayt neçə bitə bərabərdir?",
+            ["16 bit", "8 bit", "32 bit", "64 bit"],
+            0,
+          ],
+          [
+            "Əməliyyat sisteminin yüklənməsi zamanı ilkin testi hansı mikrosxem aparır?",
+            ["BIOS / ROM", "RAM", "Prosessor", "Sərt disk"],
+            0,
+          ],
+          [
+            "Mətn redaktorunda kəsilmiş və ya kopyalanmış fraqment hara düşür?",
+            [
+              "Mübadilə buferinə (Clipboard)",
+              "Səbətə",
+              "Sərt diskə birbaşa",
+              "RAM-dan silinir",
+            ],
+            0,
+          ],
+          [
+            "Dövri alqoritmin blok-sxemində təkrarlanma xətti hara qayıdır?",
+            [
+              "Şərt və ya dövrün əvvəlinə",
+              "Proqramın sonuna",
+              "Kənara",
+              "Ekrana",
+            ],
+            0,
+          ],
+          [
+            "Hansı antivirus proqramıdır?",
+            ["Kaspersky", "Photoshop", "WordPad", "Chrome"],
+            0,
+          ],
+          [
+            "Rastr təsvirlər nələrdən təşkil olunur?",
+            ["Piksellərdən", "Həndəsi düsturlardan", "Xətlərdən", "Hərflərdən"],
+            0,
+          ],
+          [
+            "Onluq 7 ədədinin ikilik say sistemində yazılışı:",
+            ["111", "101", "110", "1001"],
+            0,
+          ],
+          [
+            "Şəbəkədə fayl yükləmək (download) nə deməkdir?",
+            [
+              "Serverdən öz kompüterinə köçürmək",
+              "Öz kompüterindən internetə göndərmək",
+              "Kompüteri söndürmək",
+              "Brauzeri bağlamaq",
+            ],
+            0,
+          ],
+          [
+            "Proqramlaşdırmada dəyişən nə üçündür?",
+            [
+              "Verilənləri (qiymətləri) yaddaşda saxlamaq üçün",
+              "Piksel rəngini silmək üçün",
+              "Klaviaturanı dəyişmək üçün",
+              "Monitoru təmizləmək üçün",
+            ],
+            0,
+          ],
+          [
+            "Elektron cədvəldə düsturlar hansı işarə ilə başlayır?",
+            ["= (bərabər)", "+ (müsbət)", "# (diyez)", "$ (dollar)"],
+            0,
+          ],
+          [
+            "Hansı bulud yaddaş xidmətidir?",
+            ["Google Drive / OneDrive", "MS Paint", "VLC", "WinRAR"],
+            0,
+          ],
+          [
+            "Faylın tam yolu nəyi göstərir?",
+            [
+              "Faylın diskdə yerləşdiyi ardıcıl qovluqlar zəncirini",
+              "Yalnız faylın rəngini",
+              "İnternetin sürətini",
+              "Kompüterin qiymətini",
+            ],
+            0,
+          ],
+          [
+            "Səs fayllarının sıxılmasında ən populyar format hansıdır?",
+            [".mp3", ".bmp", ".docx", ".exe"],
+            0,
+          ],
+          [
+            "Mətn redaktorunda kursiv (əyri) yazı formatı hansı hərflə seçilir?",
+            ["I (Italic)", "B (Bold)", "U (Underline)", "S (Strike)"],
+            0,
+          ],
+        ],
+        6: [
+          [
+            "Elektron cədvəldə B1-dən B5-ə qədər olan diapazon necə yazılır?",
+            ["B1:B5", "B1-B5", "B1;B5", "B1...B5"],
+            0,
+          ],
+          [
+            "Vektor qrafik redaktoruna hansı nümunə ola bilər?",
+            ["Inkscape / CorelDraw", "MS Paint", "Adobe Photoshop", "GIMP"],
+            0,
+          ],
+          [
+            "Dünya hörümçək toru nə adlanır?",
+            ["WWW (World Wide Web)", "LAN", "IP", "DNS"],
+            0,
+          ],
+          [
+            "Excel-də xanadakı ədədlərin cəmini tapan funksiya hansıdır?",
+            ["SUM (СУММ)", "AVERAGE", "COUNT", "MAX"],
+            0,
+          ],
+          [
+            "Hansı topologiyada bütün kompüterlər bir mərkəzi qurğuya (sviçə) qoşulur?",
+            ["Ulduz (Star)", "Şin (Bus)", "Həlqə (Ring)", "Qarışıq"],
+            0,
+          ],
+          [
+            "Kompüterin daimi yaddaşı necə adlanır?",
+            ["ROM", "RAM", "Keş", "Registr"],
+            0,
+          ],
+          [
+            "Proqram kodunda xətanın axtarılması və düzəldilməsi prosesi necə adlanır?",
+            ["Sazlama (Debugging)", "Kompilyasiya", "Formatlama", "Şifrləmə"],
+            0,
+          ],
+          [
+            "Elektron cədvəldə ədədi ortanı hesablayan funksiya hansıdır?",
+            ["AVERAGE", "SUM", "MIN", "IF"],
+            0,
+          ],
+          [
+            "Rastr qrafikasının əsas çatışmazlığı nədir?",
+            [
+              "Miqyası böyütdükdə təsvirin keyfiyyətinin korlanması",
+              "Həcminin çox kiçik olması",
+              "Rənglərin az olması",
+              "Çap edilə bilməməsi",
+            ],
+            0,
+          ],
+          [
+            "Kompüterdə informasiyanın ən kiçik vahidi hansıdır?",
+            ["Bit", "Bayt", "Meqabayt", "Bod"],
+            0,
+          ],
+          [
+            "Hansı brauzer deyil?",
+            ["Linux", "Google Chrome", "Mozilla Firefox", "Safari"],
+            0,
+          ],
+          [
+            "Onluq 13 ədədinin ikilik say sistemində yazılışı:",
+            ["1101", "1011", "1110", "1100"],
+            0,
+          ],
+          [
+            "Elektron poçt ünvanında istifadəçi adı ilə server adını ayıran simvol hansıdır?",
+            ["@", "#", "$", "&"],
+            0,
+          ],
+          [
+            "Excel-də ən böyük ədədi tapan funksiya hansıdır?",
+            ["MAX", "MIN", "SUM", "LARGE"],
+            0,
+          ],
+          [
+            "HTML nə üçün istifadə olunur?",
+            [
+              "Veb-səhifələrin strukturunu yaratmaq üçün",
+              "Video montaj üçün",
+              "Kompüteri format etmək üçün",
+              "Şəkil çəkmək üçün",
+            ],
+            0,
+          ],
+          [
+            "İnformasiyanın hansı növü kəsiksiz, fasiləsiz siqnaldır?",
+            ["Analoq", "Rəqəmsal", "Diskret", "İkilik"],
+            0,
+          ],
+          [
+            "Kompüterdə hər hansı faylın axtarışını tezləşdirmək üçün hansı qısayol sıxılır?",
+            ["Ctrl + F", "Ctrl + H", "Ctrl + P", "Ctrl + N"],
+            0,
+          ],
+          [
+            "Spam nədir?",
+            [
+              "İstənməyən, kütləvi reklam məktubları",
+              "Antivirus növü",
+              "Sürətli kabel",
+              "Qrafik fayl formatı",
+            ],
+            0,
+          ],
+          [
+            "1 Giqabayt (GB) neçə Meqabaytdır?",
+            ["1024 MB", "1000 MB", "800 MB", "1048576 MB"],
+            0,
+          ],
+          [
+            "Şəbəkədə məlumat ötürmə protokolu nədir?",
+            [
+              "Kompüterlərin əlaqə saxlaması üçün qaydalar toplusu",
+              "Xüsusi kabel növü",
+              "Fleşkart markası",
+              "Kompüterin ekranı",
+            ],
+            0,
+          ],
+          [
+            "Alqoritmdə nəticəvilik xassəsi nəyi bildirir?",
+            [
+              "Müəyyən sayda addımdan sonra nəticənin alınmasını",
+              "Addımların sonsuz davam etməsini",
+              "Hər kəsin eyni başa düşməsini",
+              "Bloklarla çəkilməsini",
+            ],
+            0,
+          ],
+          [
+            "Hansı qrafik fayl formatı animasiyanı dəstəkləyir?",
+            [".gif", ".jpg", ".bmp", ".tif"],
+            0,
+          ],
+          [
+            "Elektron cədvəldə xananın mütləq ünvanı hansı işarə ilə göstərilir?",
+            ["$ (dollar)", "#", "@", "%"],
+            0,
+          ],
+          [
+            "Kompüter sisteminin beyni və ürəyi sayılan ana plata necə adlanır?",
+            ["Motherboard (Ana plata)", "Hard disk", "Power supply", "Cooler"],
+            0,
+          ],
+          [
+            "İnternetdə təhlükəsiz veb-protokol hansıdır?",
+            ["HTTPS", "HTTP", "FTP", "Telnet"],
+            0,
+          ],
+          [
+            "Elektron cədvəldə =5+3*2 düsturunun cavabı neçə olar?",
+            ["11", "16", "10", "13"],
+            0,
+          ],
+        ],
+        7: [
+          [
+            "Python dilində ekrana məlumat çıxarmaq üçün hansı funksiya istifadə olunur?",
+            ["print()", "input()", "output()", "write()"],
+            0,
+          ],
+          [
+            "Python dilində istifadəçidən məlumat daxil etməsini istəyən funksiya hansıdır?",
+            ["input()", "print()", "read()", "scan()"],
+            0,
+          ],
+          [
+            "İkilik say sistemindəki 1010 ədədi onluq sistemdə neçəyə bərabərdir?",
+            ["10", "12", "8", "14"],
+            0,
+          ],
+          [
+            "Məntiqi 'VƏ' (konyunksiya) əməliyyatı hansı halda doğru nəticə verir?",
+            [
+              "Hər iki mülahizə doğru olduqda",
+              "Ən azı biri doğru olduqda",
+              "Hər ikisi yalan olduqda",
+              "Yalnız biri doğru olduqda",
+            ],
+            0,
+          ],
+          [
+            "Python-da tam ədəd tipi necə adlanır?",
+            ["int", "float", "str", "bool"],
+            0,
+          ],
+          [
+            "Python-da kəsr (həqiqi) ədəd tipi hansıdır?",
+            ["float", "int", "char", "double"],
+            0,
+          ],
+          [
+            "Məntiqi 'VƏ YA' (dizyunksiya) əməliyyatı Python-da hansı sözlə yazılır?",
+            ["or", "and", "not", "xor"],
+            0,
+          ],
+          [
+            "ASCII kodlaşdırma cədvəlində 1 simvol yaddaşda neçə bit yer tutur?",
+            ["8 bit", "16 bit", "7 bit", "32 bit"],
+            0,
+          ],
+          [
+            "Unicode (UTF-16) cədvəlində bir simvol adətən neçə bayt yer tutur?",
+            ["2 bayt", "1 bayt", "4 bayt", "8 bayt"],
+            0,
+          ],
+          [
+            "Python-da bərabərliyi yoxlamaq üçün hansı operatordan istifadə olunur?",
+            ["==", "=", "!=", "<="],
+            0,
+          ],
+          [
+            "Onluq 25 ədədinin ikilik say sistemindəki yazılışı hansıdır?",
+            ["11001", "11010", "10101", "11100"],
+            0,
+          ],
+          [
+            "Python-da qalıqlı bölmə hansı işarə ilə aparılır?",
+            ["%", "//", "/", "**"],
+            0,
+          ],
+          [
+            "Python-da tam bölmə (tam hissəni götürmə) operatoru hansıdır?",
+            ["//", "%", "/", "^"],
+            0,
+          ],
+          [
+            "Python-da qüvvətə yüksəltmə operatoru hansıdır?",
+            ["**", "^", "^^", "pow="],
+            0,
+          ],
+          [
+            "Şəbəkədə domen adlarını IP ünvanlara çevirən xidmət hansıdır?",
+            ["DNS", "DHCP", "HTTP", "TCP"],
+            0,
+          ],
+          [
+            "Python-da sətir (mətn) tipi necə göstərilir?",
+            ["str", "string", "text", "char"],
+            0,
+          ],
+          [
+            "A = True, B = False olarsa, (A and B) ifadəsinin qiyməti nə olar?",
+            ["False", "True", "None", "Error"],
+            0,
+          ],
+          [
+            "Kompüterin əsas arxitektura prinsiplərini kim irəli sürmüşdür?",
+            ["Con fon Neyman", "Alan Türinq", "Blez Paskal", "Çarlz Bebbic"],
+            0,
+          ],
+          [
+            "Python-da şərt budaqlanması hansı açar sözlə başlayır?",
+            ["if", "for", "while", "def"],
+            0,
+          ],
+          [
+            "1 Terabayt (TB) neçə Giqabaytdır?",
+            ["1024 GB", "1000 GB", "1048576 MB", "2048 GB"],
+            0,
+          ],
+          [
+            "Python-da a = 7 // 2 əməliyyatının nəticəsi neçə olar?",
+            ["3", "3.5", "1", "4"],
+            0,
+          ],
+          [
+            "Python-da a = 7 % 2 əməliyyatının nəticəsi neçə olar?",
+            ["1", "3", "3.5", "0"],
+            0,
+          ],
+          [
+            "Məntiqi 'İNKAR' əməliyyatı Python-da necə yazılır?",
+            ["not", "no", "inv", "neg"],
+            0,
+          ],
+          [
+            "Kompüter qrafikasında RGB modelində hansı əsas rənglər var?",
+            [
+              "Qırmızı, Yaşıl, Mavi (Red, Green, Blue)",
+              "Ağ, Qara, Boz",
+              "Sarı, Göy, Qırmızı",
+              "Çəhrayı, Yaşıl, Bənövşəyi",
+            ],
+            0,
+          ],
+          [
+            "Say sistemləri hansı iki əsas qrupa bölünür?",
+            [
+              "Mövqeli və mövqesiz",
+              "Tək və cüt",
+              "Müsbət və mənfi",
+              "Adi və onluq",
+            ],
+            0,
+          ],
+          [
+            "Roma say sistemi hansı qrupa aiddir?",
+            ["Mövqesiz", "Mövqeli", "İkilik", "Alqoritmik"],
+            0,
+          ],
+        ],
+        8: [
+          [
+            "Python-da müəyyən sayda təkrarlanan dövr yaratmaq üçün hansı operator istifadə edilir?",
+            ["for i in range():", "loop()", "repeat()", "goto"],
+            0,
+          ],
+          [
+            "range(1, 10, 2) generatoru hansı ədədləri qaytarır?",
+            [
+              "1, 3, 5, 7, 9",
+              "1, 2, 3, 4, 5, 6, 7, 8, 9, 10",
+              "2, 4, 6, 8, 10",
+              "1, 3, 5, 7",
+            ],
+            0,
+          ],
+          [
+            "Python-da siyahı (list) hansı mötərizə ilə yaradılır?",
+            [
+              "[ ] (kvadrat)",
+              "( ) (dairəvi)",
+              "{ } (fiqurlu)",
+              "< > (böyük-kiçik)",
+            ],
+            0,
+          ],
+          [
+            "Python-da siyahıya yeni element əlavə etmək üçün hansı metod işlədilir?",
+            [".append()", ".add()", ".insert_new()", ".push()"],
+            0,
+          ],
+          [
+            "Python-da siyahının elementlərinin sayını hansı funksiya tapır?",
+            ["len()", "count()", "size()", "length()"],
+            0,
+          ],
+          [
+            "Onluq 64 ədədinin ikilik say sistemində yazılışında neçə sıfır var?",
+            [
+              "6 sıfır (1000000)",
+              "5 sıfır",
+              "7 sıfır",
+              "4 sıfır",
+            ],
+            0,
+          ],
+          [
+            "Python-da şərtdən asılı olan dövr hansıdır?",
+            ["while", "for", "switch", "case"],
+            0,
+          ],
+          [
+            "Fişinq (Phishing) kiberhücumu nədir?",
+            [
+              "Saxta sayt və ya məktubla istifadəçinin şifrələrini oğurlamaq",
+              "Kompüterin monitorunu sındırmaq",
+              "Sürətli internet ötürmək",
+              "Fleşkartı təmizləmək",
+            ],
+            0,
+          ],
+          [
+            "Səkkizlik say sistemində ən böyük rəqəm hansıdır?",
+            ["7", "8", "9", "F"],
+            0,
+          ],
+          [
+            "Onaltılıq say sistemində 'A' hərfi hansı onluq ədədə uyğundur?",
+            ["10", "11", "12", "15"],
+            0,
+          ],
+          [
+            "Python-da dövrü vaxtından əvvəl tam dayandırmaq üçün hansı operator istifadə edilir?",
+            ["break", "continue", "pass", "exit"],
+            0,
+          ],
+          [
+            "Python-da dövrün cari addımını ötürüb növbəti addıma keçmək üçün nə yazılır?",
+            ["continue", "break", "skip", "next"],
+            0,
+          ],
+          [
+            "Kompüter sistemində keş yaddaşın (Cache) rolu nədir?",
+            [
+              "Prosessorla əməli yaddaş (RAM) arasında sürət fərqini aradan qaldırmaq",
+              "Faylları uzun illər saxlamaq",
+              "Şəkilləri çap etmək",
+              "Səsi gücləndirmək",
+            ],
+            0,
+          ],
+          [
+            "HTML-də hiperkeçid (link) hansı teqlə yaradılır?",
+            ["<a>", "<p>", "<link>", "<h1>"],
+            0,
+          ],
+          [
+            "CSS nə üçün istifadə olunur?",
+            [
+              "Veb-səhifələrin vizual dizaynını və üslubunu tənzimləmək üçün",
+              "Verilənlər bazasını idarə etmək üçün",
+              "Kompüteri viruslardan qorumaq üçün",
+              "Rəqəmləri toplamaq üçün",
+            ],
+            0,
+          ],
+          [
+            "Python-da s = 'Informatika' olarsa, s[0] nəyə bərabərdir?",
+            ["'I'", "'n'", "'a'", "Xəta verər"],
+            0,
+          ],
+          [
+            "Python-da s = 'Salam' olarsa, s[-1] hansı simvoldur?",
+            ["'m'", "'S'", "'a'", "'l'"],
+            0,
+          ],
+          [
+            "Kriptoqrafiyada steqanoqrafiya nədir?",
+            [
+              "Gizli məlumatı başqa bir faylın (məsələn, şəklin) içində gizlətmək",
+              "Məlumatı pozmaq",
+              "Parolu hamıya bildirmək",
+              "Faylı diskdən silmək",
+            ],
+            0,
+          ],
+          [
+            "Ziyanverici proqram olan 'Troyalayan' (Trojan) nə edir?",
+            [
+              "Özünü faydalı proqram kimi göstərib sistemə daxil olur",
+              "Kompüteri soyudur",
+              "İnterneti sürətləndirir",
+              "Sənədi çap edir",
+            ],
+            0,
+          ],
+          [
+            "Python-da a = [1, 2, 3] olarsa, a * 2 nəticəsi nə olar?",
+            ["[1, 2, 3, 1, 2, 3]", "[2, 4, 6]", "[1, 2, 3, 2]", "Xəta verər"],
+            0,
+          ],
+          [
+            "Say sistemində ədədin əsası nəyi göstərir?",
+            [
+              "Həmin sistemdə istifadə olunan müxtəlif rəqəmlərin sayını",
+              "Ədədin ən böyük qiymətini",
+              "Ədədin işarəsini",
+              "Bitlərin cəmini",
+            ],
+            0,
+          ],
+          [
+            "Onaltılıq say sistemində 'F' hərfi onluqda neçədir?",
+            ["15", "16", "10", "14"],
+            0,
+          ],
+          [
+            "İnternetdə paylanmış xidmətdən imtina hücumu necə adlanır?",
+            ["DDoS", "Spam", "Phishing", "Sniffing"],
+            0,
+          ],
+          [
+            "Python-da sətirləri birləşdirmək (konkatenasiya) üçün hansı işarə işlədilir?",
+            ["+", "*", "&", "join"],
+            0,
+          ],
+          [
+            "Simmetrik şifrləmə zamanı neçə açardan istifadə olunur?",
+            [
+              "Yalnız 1 eyni açardan",
+              "İki fərqli açardan",
+              "Üç açardan",
+              "Açardan istifadə olunmur",
+            ],
+            0,
+          ],
+          [
+            "Mürəkkəb parolda ən az neçə simvol olması tövsiyə olunur?",
+            ["Ən azı 8-12 simvol", "4 simvol", "1 simvol", "Fərqi yoxdur"],
+            0,
+          ],
+        ],
+        9: [
+          [
+            "Python-da xüsusi funksiya yaratmaq üçün hansı açar sözdən istifadə edilir?",
+            ["def", "func", "function", "lambda_def"],
+            0,
+          ],
+          [
+            "Python funksiyasından qiyməti geri qaytarmaq üçün hansı söz yazılır?",
+            ["return", "give", "back", "print"],
+            0,
+          ],
+          [
+            "Relyasiya verilənlər bazasının əsas obyekti nədir?",
+            ["Cədvəl", "Modul", "Forma", "Makros"],
+            0,
+          ],
+          [
+            "Verilənlər bazası cədvəlində sətir nə adlanır?",
+            ["Yazı (Kortec / Record)", "Sahə", "Xana", "Açar"],
+            0,
+          ],
+          [
+            "Verilənlər bazası cədvəlində sütun nə adlanır?",
+            ["Sahə (Field)", "Yazı", "Cədvəl", "İndeks"],
+            0,
+          ],
+          [
+            "Cədvəldə hər bir yazını birmənalı təyin edən unikal sahə nə adlanır?",
+            ["Əsas açar (Primary Key)", "Xarici açar", "Ad sahəsi", "İndeks"],
+            0,
+          ],
+          [
+            "Onaltılıq 2F ədədi onluq say sistemində neçəyə bərabərdir?",
+            ["47", "32", "45", "50"],
+            0,
+          ],
+          [
+            "Qraf nəzəriyyəsində xətlərlə birləşən nöqtələr nə adlanır?",
+            ["Təpələr və qabırğalar (tillər)", "Xanalar", "Piksellər", "Köklər"],
+            0,
+          ],
+          [
+            "Dövri olmayan əlaqəli qraf necə adlanır?",
+            ["Ağac (Tree)", "Dövrə", "Şəbəkə", "Matris"],
+            0,
+          ],
+          [
+            "Python-da kortej (tuple) siyahıdan nə ilə fərqlənir?",
+            [
+              "Dəyişdirilə bilməz (immutable) olması ilə",
+              "Daha yavaş olması ilə",
+              "Rəqəm saxlamaması ilə",
+              "Yalnız 1 elementi olması ilə",
+            ],
+            0,
+          ],
+          [
+            "Ağac strukturunda ən yuxarıda duran, əcdadı olmayan təpə necə adlanır?",
+            ["Kök təpə (Root)", "Yarpaq", "Budaq", "Alt təpə"],
+            0,
+          ],
+          [
+            "Ağac strukturunda övladı olmayan ən sonuncu təpələr nə adlanır?",
+            ["Yarpaqlar (Leaves)", "Kök", "Gölməçə", "Budaq"],
+            0,
+          ],
+          [
+            "Python-da lüğət (dictionary) hansı strukturda məlumat saxlayır?",
+            [
+              "Açar - Qiymət (key: value)",
+              "Yalnız indekslə",
+              "Matrislə",
+              "Tək sütunla",
+            ],
+            0,
+          ],
+          [
+            "Verilənlər Bazasını İdarəetmə Sisteminə (VBİS) hansı aiddir?",
+            ["MySQL / PostgreSQL / MS Access", "Paint", "AutoCAD", "Winamp"],
+            0,
+          ],
+          [
+            "İkilik say sistemində 1101 + 1011 cəmi nəyə bərabərdir?",
+            ["11000", "10110", "11100", "10001"],
+            0,
+          ],
+          [
+            "Modelləşdirmənin hansı növündə obyekt riyazi düstur və tənliklərlə təsvir olunur?",
+            ["Riyazi model", "Maddi model", "Görünüş modeli", "Təbii model"],
+            0,
+          ],
+          [
+            "Python-da 'informatika'.upper() nəticəsi nə olar?",
+            ["'İNFORMATİKA'", "'Informatika'", "'informatika'", "Xəta"],
+            0,
+          ],
+          [
+            "Python-da sətirdəki simvolların sayını hansı funksiya qaytarır?",
+            ["len()", "size()", "max()", "count()"],
+            0,
+          ],
+          [
+            "Kompüter qrafikasında CMYK modelindən harada geniş istifadə edilir?",
+            ["Poliqrafiyada (çap işlərində)", "Monitor ekranında", "Telefon ekranında", "Videoda"],
+            0,
+          ],
+          [
+            "Asimmetrik şifrləmədə hansı iki açar cütlüyü istifadə edilir?",
+            [
+              "Açıq (Public) və Məxfi (Private) açarlar",
+              "Şəxsi və Şəbəkə açarları",
+              "İki eyni gizli açar",
+              "Açar olmur",
+            ],
+            0,
+          ],
+          [
+            "Elektron rəqəmsal imza (e-imza) nəyi təmin edir?",
+            [
+              "Sənədin həqiqiliyini və müəllifini təsdiq etməyi",
+              "Sənədi çap etməyi",
+              "Sənədin rəngini dəyişməyi",
+              "Sənədi qısaltmağı",
+            ],
+            0,
+          ],
+          [
+            "Python-da çoxluq (set) hansı xüsusiyyətə malikdir?",
+            [
+              "Bütün elementləri unikal olur, təkrarlanma olmur",
+              "Elementlər indekslə çağırılır",
+              "Dəyişdirilə bilməz",
+              "Həmişə sıralı qalır",
+            ],
+            0,
+          ],
+          [
+            "Məntiq cədvəlində 3 dəyişən (A, B, C) üçün neçə müxtəlif sətir (kombinasiya) olar?",
+            ["8 (2^3)", "6", "9", "16"],
+            0,
+          ],
+          [
+            "Səkkizlik 77 ədədi ikilikdə necə görünər?",
+            ["111111", "101101", "110110", "111000"],
+            0,
+          ],
+          [
+            "Python-da d = {'ad': 'Ali', 'bal': 90} olduqda d['ad'] nə qaytarır?",
+            ["'Ali'", "90", "ad", "Xəta"],
+            0,
+          ],
+          [
+            "Verilənlər bazasında SQL hansı mənaya gəlir?",
+            [
+              "Strukturlaşdırılmış Sorğu Dili (Structured Query Language)",
+              "Sistem Şəbəkə Xətti",
+              "Sadə Sual Bazası",
+              "Standart Kod Qaydası",
+            ],
+            0,
+          ],
+        ],
+        10: [
+          [
+            "Fon Neyman arxitekturasının əsas prinsipi hansıdır?",
+            [
+              "Proqram və verilənlərin eyni yaddaşda saxlanması",
+              "Kompüterin internetsiz işləyə bilməməsi",
+              "Monitorun ayrı olması",
+              "Hər əməliyyat üçün ayrı prosessor tələb olunması",
+            ],
+            0,
+          ],
+          [
+            "Alqoritmin asimptotik mürəkkəbliyində O(1) nəyi ifadə edir?",
+            [
+              "Sabit zamanlı icra (giriş ölçüsündən asılı deyil)",
+              "Xətti artan zamanı",
+              "Kvadratik mürəkkəbliyi",
+              "Sonsuz dövrü",
+            ],
+            0,
+          ],
+          [
+            "İkilik axtarış (Binary Search) alqoritminin zaman mürəkkəbliyi nə qədərdir?",
+            ["O(log n)", "O(n)", "O(n^2)", "O(1)"],
+            0,
+          ],
+          [
+            "İkilik axtarışın tətbiq olunması üçün massiv hansı şərti ödəməlidir?",
+            [
+              "Çeşidlənmiş (sıralanmış) olmalıdır",
+              "Tək ədədlərdən ibarət olmalıdır",
+              "Mənfi ədədlər olmamalıdır",
+              "Uzunluğu cüt olmalıdır",
+            ],
+            0,
+          ],
+          [
+            "IPv4 ünvanı neçə bitdən ibarətdir?",
+            ["32 bit (4 bayt)", "64 bit", "128 bit", "16 bit"],
+            0,
+          ],
+          [
+            "IPv6 ünvanı neçə bitdən təşkil olunmuşdur?",
+            ["128 bit", "32 bit", "64 bit", "256 bit"],
+            0,
+          ],
+          [
+            "Rekursiya proqramlaşdırmada nə deməkdir?",
+            [
+              "Funksiyanın özü-özünü çağırması",
+              "Sonsuz dövr yaranması",
+              "Siyahının tərsinə çevrilməsi",
+              "Yaddaşın daşması",
+            ],
+            0,
+          ],
+          [
+            "Verilənlər strukturunda LIFO (Last In First Out) prinsipi ilə hansı işləyir?",
+            ["Yığın (Stack)", "Növbə (Queue)", "Ağac (Tree)", "Qraf"],
+            0,
+          ],
+          [
+            "Verilənlər strukturunda FIFO (First In First Out) prinsipi ilə hansı işləyir?",
+            ["Növbə (Queue)", "Yığın (Stack)", "Massiv", "Lüğət"],
+            0,
+          ],
+          [
+            "Bubble Sort (Qabarcıq çeşidləməsi) alqoritminin ən pis halda mürəkkəbliyi nədir?",
+            ["O(n^2)", "O(n)", "O(n log n)", "O(log n)"],
+            0,
+          ],
+          [
+            "Merge Sort (Birləşdirmə çeşidləməsi) alqoritminin mürəkkəbliyi nədir?",
+            ["O(n log n)", "O(n^2)", "O(n)", "O(2^n)"],
+            0,
+          ],
+          [
+            "Şəbəkədə alt-şəbəkə maskası (Subnet Mask) nə üçündür?",
+            [
+              "IP ünvanda şəbəkə və qovşaq (host) hissələrini ayırmaq üçün",
+              "Parolu gizlətmək üçün",
+              "İnterneti sürətləndirmək üçün",
+              "Saytın adını dəyişmək üçün",
+            ],
+            0,
+          ],
+          [
+            "Python-da faylı oxumaq rejimində açmaq üçün hansı parametr verilir?",
+            ["open('fayl.txt', 'r')", "'w'", "'a'", "'x'"],
+            0,
+          ],
+          [
+            "Python-da fayla məlumat əlavə etmək (append) üçün hansı rejim açılır?",
+            ["'a'", "'w'", "'r'", "'b'"],
+            0,
+          ],
+          [
+            "Relyasiya verilənlər bazasında iki cədvəl arasında hansı açarla əlaqə qurulur?",
+            [
+              "Xarici açar (Foreign Key)",
+              "Yalnız əsas açar",
+              "Şifrə açarı",
+              "Qovluq yolu",
+            ],
+            0,
+          ],
+          [
+            "Kompüter sistemlərində RAID texnologiyası nə üçün tətbiq olunur?",
+            [
+              "Disklərin etibarlılığını və sürətini artırmaq üçün",
+              "Prosessorun tezliyini qaldırmaq üçün",
+              "Səsi təmizləmək üçün",
+              "Ekran keyfiyyətini qaldırmaq üçün",
+            ],
+            0,
+          ],
+          [
+            "Python-da lambda funksiyası nədir?",
+            [
+              "Anonim, birsətirlik adsız funksiya",
+              "Dövr operatoru",
+              "Fayl oxuma modulu",
+              "Kəsr ədəd növü",
+            ],
+            0,
+          ],
+          [
+            "Aşağıdakılardan hansı dinamik proqramlaşdırmanın əsas qaydasıdır?",
+            [
+              "Alt-məsələlərin nəticələrini yadda saxlayıb təkrar istifadə etmək",
+              "Hər dəfə sıfırdan hesablamaq",
+              "Alqoritmi təsadüfi dayandırmaq",
+              "Yalnız for dövrü işlətmək",
+            ],
+            0,
+          ],
+          [
+            "Kompüterin mərkəzi prosessorunda takt tezliyi nə ilə ölçülür?",
+            ["Herts (GHz, MHz)", "Bayt", "Piksel", "Amper"],
+            0,
+          ],
+          [
+            "Python-da [x**2 for x in range(5)] ifadəsinin nəticəsi nə olar?",
+            ["[0, 1, 4, 9, 16]", "[1, 4, 9, 16, 25]", "[0, 2, 4, 6, 8]", "Xəta"],
+            0,
+          ],
+          [
+            "SQL dilində cədvəldən məlumatları seçmək üçün hansı açar əmr işlədilir?",
+            ["SELECT", "GET", "EXTRACT", "FIND"],
+            0,
+          ],
+          [
+            "SQL-də sətrləri müəyyən şərtə görə filtrləmək üçün hansı bənd yazılır?",
+            ["WHERE", "HAVING", "GROUP", "ORDER"],
+            0,
+          ],
+          [
+            "OSI modelinin ən aşağı (1-ci) səviyyəsi hansıdır?",
+            ["Fiziki (Physical)", "Kanal (Data Link)", "Şəbəkə", "Tətbiqi"],
+            0,
+          ],
+          [
+            "OSI etalon modelində neçə səviyyə var?",
+            ["7 səviyyə", "4 səviyyə", "5 səviyyə", "8 səviyyə"],
+            0,
+          ],
+          [
+            "Python-da istisnaları (xətaları) tutmaq üçün hansı blok istifadə olunur?",
+            ["try ... except", "if ... else", "do ... while", "check ... error"],
+            0,
+          ],
+          [
+            "Simmetrik şifrləmə alqoritminə nümunə hansıdır?",
+            ["AES / DES", "RSA", "ECC", "Diffie-Hellman"],
+            0,
+          ],
+        ],
+        11: [
+          [
+            "OSI modelinin Tətbiqi səviyyəsində (Application layer) işləyən protokol hansıdır?",
+            ["HTTP / DNS / FTP", "IP", "TCP", "Ethernet"],
+            0,
+          ],
+          [
+            "TCP və UDP protokolları OSI modelinin hansı səviyyəsində çalışır?",
+            [
+              "Nəqliyyat (Transport)",
+              "Şəbəkə (Network)",
+              "Kanal",
+              "Tətbiqi",
+            ],
+            0,
+          ],
+          [
+            "TCP protokolunun UDP-dən əsas üstünlüyü nədir?",
+            [
+              "Paketlərin çatdırılmasına və ardıcıllığına zəmanət verməsi",
+              "Daha sürətli olması",
+              "Başlığının kiçik olması",
+              "Heç bir yoxlama aparmaması",
+            ],
+            0,
+          ],
+          [
+            "UDP protokolunun əsas üstünlüyü və istifadə sahəsi nədir?",
+            [
+              "Yüksək sürət və az gecikmə (onlayn yayım, oyunlar)",
+              "Faylın 100% dəqiq çatması",
+              "Şifrələmə aparması",
+              "Məlumatı arxivləməsi",
+            ],
+            0,
+          ],
+          [
+            "Asimmetrik kriptoqrafiya alqoritminə hansı məşhur nümunədir?",
+            ["RSA", "AES", "DES", "Blowfish"],
+            0,
+          ],
+          [
+            "SQL-də cədvələ yeni yazı əlavə etmək üçün hansı əmr işlədilir?",
+            ["INSERT INTO", "ADD ROW", "UPDATE", "CREATE"],
+            0,
+          ],
+          [
+            "SQL-də cədvəldə mövcud olan məlumatı yeniləmək üçün hansı əmr yazılır?",
+            ["UPDATE", "REVISE", "ALTER", "CHANGE"],
+            0,
+          ],
+          [
+            "SQL-də cədvəldən müəyyən yazıları silmək üçün hansı əmr istifadə olunur?",
+            ["DELETE FROM", "REMOVE", "DROP TABLE", "CLEAR"],
+            0,
+          ],
+          [
+            "Verilənlər bazasında 'JOIN' əməliyyatının məqsədi nədir?",
+            [
+              "İki və ya daha çox cədvəli ortaq sahəyə görə əlaqələndirib birləşdirmək",
+              "Cədvəli yaddaşdan silmək",
+              "Yalnız cədvəlin adını dəyişmək",
+              "Bütün ədədləri toplamaq",
+            ],
+            0,
+          ],
+          [
+            "Maşın öyrənməsində 'Supervised Learning' (Müəllimli öyrənmə) nə deməkdir?",
+            [
+              "Modelin işarələnmiş (giriş və düzgün çıxış cütlüyü olan) verilənlərlə öyrədilməsi",
+              "Modelin heç bir köməksiz qruplaşdırma aparması",
+              "Modelin yalnız internetdən şəkil axtarması",
+              "Kompüterin özünü format etməsi",
+            ],
+            0,
+          ],
+          [
+            "Maşın öyrənməsində 'Unsupervised Learning' (Müəllimsiz öyrənmə) nümunəsi hansıdır?",
+            ["Klasterizasiya (Clustering)", "Reqressiya", "Təsnifat", "Xətti axtarış"],
+            0,
+          ],
+          [
+            "Neyron şəbəkələrində aktivasiya funksiyası nə üçün lazımdır?",
+            [
+              "Şəbəkəyə qeyri-xəttilik gətirmək üçün",
+              "Şəbəkəni söndürmək üçün",
+              "Yalnız çəkiləri sıfırlamaq üçün",
+              "Verilənləri silmək üçün",
+            ],
+            0,
+          ],
+          [
+            "Qraf alqoritmlərində ən qısa yolu tapan məşhur alqoritm hansıdır?",
+            ["Deykstra (Dijkstra)", "Bubble Sort", "İkilik axtarış", "Lineer axtarış"],
+            0,
+          ],
+          [
+            "Bulud hesablamalarında IaaS (Infrastructure as a Service) nə təqdim edir?",
+            [
+              "Fiziki və ya virtual serverlər, şəbəkə və yaddaş infrastrukturu",
+              "Yalnız hazır proqram təminatı",
+              "Yalnız domen adı",
+              "Kabel xətləri",
+            ],
+            0,
+          ],
+          [
+            "Bulud modellərində SaaS (Software as a Service) nümunəsi hansıdır?",
+            [
+              "Google Workspace (Gmail, Docs) / Office 365",
+              "Virtual maşın icarəsi",
+              "Xam server şkafı",
+              "Linux quraşdırma diski",
+            ],
+            0,
+          ],
+          [
+            "Blokçeyn (Blockchain) texnologiyasının əsas xüsusiyyəti nədir?",
+            [
+              "Mərkəzləşdirilməmiş, dəyişdirilməsi qeyri-mümkün paylanmış reyestr",
+              "Bütün məlumatın bir mərkəzi serverdə olması",
+              "Şifrələmənin olmaması",
+              "İnternetə ehtiyac duymaması",
+            ],
+            0,
+          ],
+          [
+            "Hash funksiyalarının əsas xüsusiyyəti hansıdır?",
+            [
+              "Birtərəfli olması (nəticədən ilkin mətni bərpa etmək qeyri-mümkündür)",
+              "İxtiyari vaxt tərsinə çevrilə bilməsi",
+              "Həmişə müxtəlif ölçüdə nəticə verməsi",
+              "Şifrəsiz mətn kimi oxunması",
+            ],
+            0,
+          ],
+          [
+            "Məşhur kriptoqrafik heş alqoritminə hansı aiddir?",
+            ["SHA-256", "AES-128", "RSA-2048", "HTTP"],
+            0,
+          ],
+          [
+            "Obyektyönlü proqramlaşdırmanın (OOP) 3 əsas sütunu hansıdır?",
+            [
+              "İnkapsulyasiya, Varislik, Polimorfizm",
+              "Dövr, Şərt, Funksiya",
+              "HTML, CSS, JS",
+              "Siyahı, Lüğət, Kortej",
+            ],
+            0,
+          ],
+          [
+            "Python-da sinif (class) yaratmaq üçün hansı açar söz istifadə olunur?",
+            ["class", "def", "struct", "object"],
+            0,
+          ],
+          [
+            "Turing Testi nəyi müəyyənləşdirmək üçün təklif olunmuşdur?",
+            [
+              "Maşının (süni intellektin) insan kimi düşünə bilmə qabiliyyətini",
+              "Kompüterin yaddaşının sürətini",
+              "İnternetin ötürmə qabiliyyətini",
+              "Şəbəkədəki kabellərin möhkəmliyini",
+            ],
+            0,
+          ],
+          [
+            "Kvant kompüterlərinin ən kiçik informasiya vahidi nə adlanır?",
+            ["Qubit (Qubit)", "Bit", "Bayt", "Kvant"],
+            0,
+          ],
+          [
+            "İnformasiya təhlükəsizliyində CIA üçbucağı nələrdən ibarətdir?",
+            [
+              "Məxfilik, Bütövlük, Əlçatanlıq (Confidentiality, Integrity, Availability)",
+              "Sürət, Yaddaş, Güc",
+              "Kompüter, Şəbəkə, İnternet",
+              "Parol, Kod, Giriş",
+            ],
+            0,
+          ],
+          [
+            "SQL sorğusunda 'GROUP BY' nə üçün istifadə olunur?",
+            [
+              "Sətirləri eyni dəyərə malik qruplarda cəmləşdirmək üçün",
+              "Cədvəli silmək üçün",
+              "Məlumatı təsadüfi qarışdırmaq üçün",
+              "Şrifti böyütmək üçün",
+            ],
+            0,
+          ],
+          [
+            "Böyük Verilənlər (Big Data) anlayışının əsas 'V' faktorlarına hansılar aiddir?",
+            [
+              "Volume (Həcm), Velocity (Sürət), Variety (Müxtəliflik)",
+              "Video, Voice, View",
+              "Virus, Version, Variable",
+              "Vektor, Virtual, Valid",
+            ],
+            0,
+          ],
+          [
+            "Dijkstra alqoritmi hansı qraflarda ən qısa yolu tapmaq üçün işləmir?",
+            [
+              "Mənfi çəkili tilləri olan qraflarda",
+              "Müsbət çəkili qraflarda",
+              "Ağac tipli qraflarda",
+              "Yönləndirilmiş qraflarda",
+            ],
+            0,
+          ],
+        ],
+      };
+
+      /* ========================================================
+   TƏTBİQİN İŞ MƏNTİQİ VƏ STATE MENECMENTİ
+======================================================== */
+      let grade = 0,
+        studentName = "",
+        questions = [],
+        shuffledOptions = [],
+        answers = [],
+        currentIndex = 0,
+        startAt = 0,
+        timerId = null,
+        isFinished = false,
+        limitSec = 45 * 60;
+
+      const app = document.getElementById("app");
+
+      // Köməkçi funksiyalar
+      function esc(s) {
+        return String(s).replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      }
+
+      function shuffle(arr) {
+        let a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      function fmtTime(sec) {
+        sec = Math.max(0, Math.round(sec));
+        return (
+          String(Math.floor(sec / 60)).padStart(2, "0") +
+          ":" +
+          String(sec % 60).padStart(2, "0")
+        );
+      }
+
+      function vibrate(ms = 35) {
+        if (navigator.vibrate) navigator.vibrate(ms);
+      }
+
+      /* 1. ƏSAS GİRİŞ EKRANI */
+      function renderHome() {
+        stopTimer();
+        isFinished = false;
+        grade = 0;
+
+        app.innerHTML = `
+    <section class="card center">
+      <div class="logo">İF</div>
+      <h1>İnformatika <span>Milyonçusu</span></h1>
+      <p class="muted">Hər dəfə yeni və təsadüfi suallarla mobil sınaq</p>
+
+      <div class="badges">
+        <div class="badge"><b>25</b> təsadüfi sual</div>
+        <div class="badge"><b>1-11-ci</b> siniflər</div>
+        <div class="badge"><b>Offline</b> dəstəyi</div>
+      </div>
+
+      <label>Sinifinizi seçin:</label>
+      <div class="classgrid">
+        ${Array.from({ length: 11 }, (_, i) => `<button class="classbtn" data-grade="${i + 1}">${i + 1}</button>`).join("")}
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="student">Ad və Soyadınız</label>
+          <input id="student" maxlength="50" placeholder="Məsələn: Tural Fərəcov">
+        </div>
+        <div>
+          <label for="time">Müddət</label>
+          <select id="time">
+            <option value="45">45 dəqiqə</option>
+            <option value="30">30 dəqiqə</option>
+            <option value="20">20 dəqiqə</option>
+            <option value="10">10 dəqiqə</option>
+          </select>
+        </div>
+      </div>
+
+      <button id="start" class="btn primary" disabled>🚀 Sınağa Başla</button>
+      <button id="installPwa" class="btn secondary" style="margin-top:10px; display:none;">📲 Tətbiqi Telefona Quraşdır</button>
+    </section>
+  `;
+
+        // Sinif seçimi eventləri
+        document.querySelectorAll("[data-grade]").forEach((b) => {
+          b.onclick = () => {
+            vibrate(20);
+            grade = +b.dataset.grade;
+            document
+              .querySelectorAll("[data-grade]")
+              .forEach((x) => x.classList.toggle("active", x === b));
+            checkValid();
+          };
+        });
+
+        document.getElementById("student").oninput = checkValid;
+        document.getElementById("start").onclick = startQuiz;
+
+        setupPwaInstall();
+      }
+
+      function checkValid() {
+        let val = document.getElementById("student").value.trim();
+        let words = val.split(/\s+/).filter(Boolean);
+        document.getElementById("start").disabled = !(
+          grade > 0 && words.length >= 1
+        );
+      }
+
+      /* 2. SINAĞA BAŞLAMAQ (TƏSADÜFİ SUALLARIN GENERASİYASI) */
+      function startQuiz() {
+        vibrate(40);
+        studentName = document
+          .getElementById("student")
+          .value.trim()
+          .replace(/\s+/g, " ");
+        let mins = Number(document.getElementById("time").value) || 45;
+        limitSec = mins * 60;
+
+        let pool = QUESTION_POOL[grade] || QUESTION_POOL[1];
+
+        // Sual hovuzundan tam təsadüfi (random) TOTAL_QUESTIONS sayda seçirik
+        let rawQuestions = shuffle(pool).slice(0, TOTAL_QUESTIONS);
+
+        // Hər bir sualı formatlayırıq və variantların daxili nizamını da qarışdırırıq
+        questions = rawQuestions.map((q) => {
+          let originalOptions = q[1];
+          let correctIndex = q[2];
+          let correctText = originalOptions[correctIndex];
+
+          let indexedOptions = originalOptions.map((text, i) => ({
+            text,
+            isCorrect: i === correctIndex,
+          }));
+          let shuffled = shuffle(indexedOptions);
+          let newCorrectIndex = shuffled.findIndex((o) => o.isCorrect);
+
+          return {
+            text: q[0],
+            options: shuffled.map((o) => o.text),
+            correct: newCorrectIndex,
+          };
+        });
+
+        answers = Array(TOTAL_QUESTIONS).fill(-1);
+        currentIndex = 0;
+        startAt = Date.now();
+        isFinished = false;
+
+        renderQuizScreen();
+        startTimer();
+      }
+
+      function startTimer() {
+        stopTimer();
+        function tick() {
+          let el = document.getElementById("timer");
+          if (!el || isFinished) {
+            stopTimer();
+            return;
+          }
+          let remain = Math.max(0, limitSec - (Date.now() - startAt) / 1000);
+          el.textContent = fmtTime(remain);
+          if (remain <= 0) finishQuiz(true);
+        }
+        tick();
+        timerId = setInterval(tick, 250);
+      }
+
+      function stopTimer() {
+        if (timerId) clearInterval(timerId);
+        timerId = null;
+      }
+
+      /* 3. TEST EKRANI */
+      function renderQuizScreen() {
+        let q = questions[currentIndex];
+        let answered = answers[currentIndex] !== -1;
+        let progressPct = ((currentIndex + 1) / TOTAL_QUESTIONS) * 100;
+
+        app.innerHTML = `
+    <section class="card">
+      <div class="top-bar">
+        <span class="pill"><b>${grade}-ci sinif</b> · ${esc(studentName)}</span>
+        <span class="pill timer" id="timer">${fmtTime(limitSec - (Date.now() - startAt) / 1000)}</span>
+      </div>
+
+      <div class="progress">
+        <div class="progress-bar" style="width: ${progressPct}%"></div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+        <span class="muted" style="font-size:13px; font-weight:700;">SUAL ${currentIndex + 1} / ${TOTAL_QUESTIONS}</span>
+        <span class="muted" style="font-size:13px;">Cavablandı: ${answers.filter((x) => x !== -1).length}</span>
+      </div>
+
+      <div class="question-box">
+        ${esc(q.text)}
+      </div>
+
+      <div class="answers-grid">
+        ${q.options
+          .map(
+            (opt, i) => `
+          <button class="ans-btn ${answers[currentIndex] === i ? "selected" : ""}" data-ans="${i}" ${answered ? "disabled" : ""}>
+            <span class="letter">${["A", "B", "C", "D"][i]}</span>
+            <span>${esc(opt)}</span>
+          </button>
+        `,
+          )
+          .join("")}
+      </div>
+
+      <div class="row" style="margin-top: 24px;">
+        <button id="finishBtn" class="btn secondary">Testi Bitir</button>
+        <button id="nextBtn" class="btn primary">${currentIndex === TOTAL_QUESTIONS - 1 ? "Nəticəni Gör 🏁" : "Növbəti Sual →"}</button>
+      </div>
+    </section>
+  `;
+
+        document.querySelectorAll("[data-ans]").forEach((btn) => {
+          btn.onclick = () => {
+            if (answers[currentIndex] !== -1 || isFinished) return;
+            vibrate(25);
+            answers[currentIndex] = +btn.dataset.ans;
+            renderQuizScreen();
+          };
+        });
+
+        document.getElementById("nextBtn").onclick = () => {
+          vibrate(20);
+          if (currentIndex < TOTAL_QUESTIONS - 1) {
+            currentIndex++;
+            renderQuizScreen();
+          } else {
+            finishQuiz(false);
+          }
+        };
+
+        document.getElementById("finishBtn").onclick = () => {
+          if (confirm("Testi vaxtından əvvəl bitirmək istəyirsiniz?")) {
+            finishQuiz(false);
+          }
+        };
+      }
+
+      /* 4. NƏTİCƏ EKRANI */
+      function finishQuiz(timeout = false) {
+        if (isFinished) return;
+        isFinished = true;
+        stopTimer();
+        vibrate([50, 100, 50]);
+
+        let correctCount = questions.reduce(
+          (acc, q, i) => acc + (answers[i] === q.correct ? 1 : 0),
+          0,
+        );
+        let pct = Math.round((correctCount / TOTAL_QUESTIONS) * 100);
+        let spent = Math.round((Date.now() - startAt) / 1000);
+
+        let code = `INF-${grade}S-${Math.floor(Date.now() / 1000).toString(36).toUpperCase()}-${correctCount}D${TOTAL_QUESTIONS}`;
+        let shareText = `İnformatika Testi (${grade}-ci sinif)\nŞagird: ${studentName}\nNəticə: ${correctCount}/${TOTAL_QUESTIONS} (${pct}%)\nVaxt: ${Math.floor(spent / 60)} dəq ${spent % 60} san\nTəsdiq kodu: ${code}`;
+
+        app.innerHTML = `
+    <section class="card center">
+      <div class="logo">🏆</div>
+      <h1>${pct >= 80 ? "Əla Nəticə!" : pct >= 50 ? "Yaxşı Cəhd!" : "Daha Çox Çalışmalısan!"}</h1>
+      <p class="muted">${esc(studentName)} · ${grade}-ci sinif ${timeout ? "(Vaxt bitdi)" : ""}</p>
+
+      <div style="font-size:clamp(46px, 10vw, 68px); font-weight:900; color:var(--gold); margin: 8px 0;">
+        ${correctCount} <span style="font-size:0.45em; color:#fff;">/ ${TOTAL_QUESTIONS}</span>
+      </div>
+      <h2 style="margin:0 0 16px;">${pct}%</h2>
+
+      <div class="row">
+        <div class="pill">Düzgün: <b style="color:var(--green)">${correctCount}</b></div>
+        <div class="pill">Səhv: <b style="color:var(--red)">${answers.filter((a, i) => a !== -1 && a !== questions[i].correct).length}</b></div>
+        <div class="pill">Boş: <b>${answers.filter((a) => a === -1).length}</b></div>
+      </div>
+
+      <div class="review-grid">
+        ${questions
+          .map((q, i) => {
+            let cls =
+              answers[i] === -1
+                ? "c-empty"
+                : answers[i] === q.correct
+                  ? "c-true"
+                  : "c-false";
+            return `<div class="rev-tag ${cls}">${i + 1}</div>`;
+          })
+          .join("")}
+      </div>
+
+      <div class="code-box">${code}</div>
+
+      <div class="row" style="margin-top:16px;">
+        <a class="btn" style="background:#25D366; color:#fff;" target="_blank" href="https://wa.me/?text=${encodeURIComponent(shareText)}">📲 WhatsApp ilə Paylaş</a>
+        <button id="retryBtn" class="btn primary">🔄 Yenidən Sına (Yeni Suallar)</button>
+      </div>
+
+      <button id="homeBtn" class="btn secondary" style="margin-top:10px;">🏠 Əsas Menyuya Qayıt</button>
+
+      <details style="text-align:left; margin-top:20px; font-size:14px; background:#04092b; padding:12px; border-radius:12px;">
+        <summary style="cursor:pointer; font-weight:700; color:var(--gold);">Cavabların Analizi (Geniş baxış)</summary>
+        <div style="margin-top:12px;">
+          ${questions
+            .map(
+              (q, i) => `
+            <div style="margin-bottom:12px; border-bottom:1px solid #1c2b6e; padding-bottom:8px;">
+              <b>${i + 1}. ${esc(q.text)}</b><br>
+              Sənin cavabın: <span style="color:${answers[i] === q.correct ? "var(--green)" : "var(--red)"}">
+                ${answers[i] === -1 ? "Cavab verilməyib" : esc(q.options[answers[i]])}
+              </span><br>
+              Düzgün cavab: <b style="color:var(--gold)">${esc(q.options[q.correct])}</b>
+            </div>
+          `,
+            )
+            .join("")}
+        </div>
+      </details>
+    </section>
+  `;
+
+        document.getElementById("retryBtn").onclick = () => {
+          vibrate(30);
+          startQuiz(); // Eyni şagird və sinif üçün YEPYENİ 25 sual seçir
+        };
+        document.getElementById("homeBtn").onclick = () => {
+          vibrate(20);
+          renderHome();
+        };
+      }
+
+      /* 5. PWA (PROQRAMI MOBİLƏ QURAŞDIRMAQ DƏSTƏYİ) */
+      let deferredPrompt;
+      function setupPwaInstall() {
+        window.addEventListener("beforeinstallprompt", (e) => {
+          e.preventDefault();
+          deferredPrompt = e;
+          const btn = document.getElementById("installPwa");
+          if (btn) {
+            btn.style.display = "block";
+            btn.onclick = async () => {
+              if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const choice = await deferredPrompt.userChoice;
+                if (choice.outcome === "accepted") {
+                  btn.style.display = "none";
+                }
+                deferredPrompt = null;
+              }
+            };
+          }
+        });
+      }
+
+      // Offline işləməsi üçün Service Worker qeydiyyatı
+      if ("serviceWorker" in navigator) {
+        const swBlob = new Blob(
+          [
+            `
+      const CACHE_NAME = 'inf-v1';
+      self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
+      self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
+      self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
+    `,
+          ],
+          { type: "application/javascript" },
+        );
+
+        navigator.serviceWorker
+          .register(URL.createObjectURL(swBlob))
+          .catch(() => {});
+      }
+
+      renderHome();
+    </script>
+  </body>
+</html>
